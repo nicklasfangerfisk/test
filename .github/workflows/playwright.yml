@@ -32,5 +32,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npm test
+      - name: Run Playwright tests and accumulate results
+        run: |
+          npx playwright test --reporter=json:test-results/last-run.json
+          node playwright-accumulate-results.js
