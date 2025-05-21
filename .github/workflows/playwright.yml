@@ -38,7 +38,8 @@ jobs:
       - name: Run Playwright tests and accumulate results
         shell: bash
         run: |
-          npx playwright test --reporter json > test-results/last-run.json
+          npx playwright test --reporter json > test-results/.last-run.json
           ls -l test-results
-          cat test-results/last-run.json
+          cat test-results/.last-run.json
+          mv test-results/.last-run.json test-results/last-run.json
           node playwright-accumulate-results.js
