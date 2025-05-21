@@ -1,0 +1,10 @@
+[
+  {
+    "description": "should load the page",
+    "steps": [
+      "Go to the homepage.",
+      "Check that the page title does not contain 404, Not Found, or Site not found."
+    ],
+    "expected": "The page loads successfully and does not show an error title."
+  }
+]
