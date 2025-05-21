@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test --reporter=json:test-results/last-run.json && node playwright-accumulate-results.js"
   },
   "keywords": [],
   "author": "",

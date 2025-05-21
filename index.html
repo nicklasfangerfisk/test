@@ -25,7 +25,7 @@
   <script>
     async function loadResults() {
       try {
-        const res = await fetch('tests/oversight.spec.json');
+        const res = await fetch('test-results/results.json');
         const data = await res.json();
         // Show only the last 30 results (if available)
         const lastResults = data.slice(-30).reverse();
