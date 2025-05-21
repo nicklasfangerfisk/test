@@ -34,15 +34,13 @@
         const total = lastResults.length;
         const passPercent = total ? ((passCount / total) * 100).toFixed(1) : '0.0';
         let html = `<div style='margin-bottom:16px;'><b>Last ${total} runs</b> &mdash; Pass rate: <span style='color:${passPercent>=80?'#2e7d32':'#c62828'}'>${passPercent}%</span></div>`;
-        html += `<table><thead><tr><th>#</th><th>Description</th><th>Result</th><th>Steps</th><th>Expected</th><th>Timestamp</th></tr></thead><tbody>`;
+        html += `<table><thead><tr><th>#</th><th>Test ID</th><th>Test Name</th><th>Result</th></tr></thead><tbody>`;
         lastResults.forEach((test, i) => {
           html += `<tr>`;
           html += `<td>${total - i}</td>`;
+          html += `<td>${test.id || ''}</td>`;
           html += `<td>${test.description || ''}</td>`;
           html += `<td class='${(test.result||'').toLowerCase()}'>${test.result || ''}</td>`;
-          html += `<td><ul>${(test.steps||[]).map(s=>`<li>${s}</li>`).join('')}</ul></td>`;
-          html += `<td>${test.expected || ''}</td>`;
-          html += `<td>${test.timestamp ? new Date(test.timestamp).toLocaleString() : ''}</td>`;
           html += `</tr>`;
         });
         html += `</tbody></table>`;
