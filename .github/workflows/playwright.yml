@@ -34,5 +34,5 @@ jobs:
 
       - name: Run Playwright tests and accumulate results
         run: |
-          npx playwright test --reporter=json:test-results/last-run.json
+          npx playwright test --reporter json | tee test-results/last-run.json
           node playwright-accumulate-results.js
