@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Results Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    th, td { padding: 12px 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f0f0f0; }
+    tr:last-child td { border-bottom: none; }
+    .passed { color: #2e7d32; font-weight: bold; }
+    .failed { color: #c62828; font-weight: bold; }
+    .skipped { color: #f9a825; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test Results Dashboard</h1>
+    <div id="results"></div>
+  </div>
+  <script>
+    async function loadResults() {
+      try {
+        const res = await fetch('tests/oversight.spec.json');
+        const data = await res.json();
+        let html = `<table><thead><tr><th>Description</th><th>Steps</th><th>Expected</th></tr></thead><tbody>`;
+        for (const test of data) {
+          html += `<tr>`;
+          html += `<td>${test.description || ''}</td>`;
+          html += `<td><ul>${(test.steps||[]).map(s=>`<li>${s}</li>`).join('')}</ul></td>`;
+          html += `<td>${test.expected || ''}</td>`;
+          html += `</tr>`;
+        }
+        html += `</tbody></table>`;
+        document.getElementById('results').innerHTML = html;
+      } catch (e) {
+        document.getElementById('results').innerHTML = '<p style="color:red">Could not load test results.</p>';
+      }
+    }
+    loadResults();
+  </script>
+</body>
+</html>
