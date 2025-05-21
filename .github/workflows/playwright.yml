@@ -36,6 +36,7 @@ jobs:
         run: mkdir -p test-results
 
       - name: Run Playwright tests and accumulate results
+        shell: bash
         run: |
           npx playwright test --reporter json > test-results/last-run.json
           ls -l test-results
